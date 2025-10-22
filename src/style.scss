@@ -1,0 +1,152 @@
+$bg: #f3f3f6;
+$ink: #1b1e28;
+$ink-weak: #6b7280;
+$brand: #6ea8fe;
+$accent: #c9b6ff;
+$shadow: 0 6px 20px rgba(0,0,0,.1);
+
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: $ink;
+  background: $bg;
+}
+
+
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  backdrop-filter: saturate(140%) blur(6px);
+  background: rgba(255,255,255,.85);
+  border-bottom: 1px solid rgba(27,30,40,.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+}
+
+.header__left { display: flex; align-items: center; gap: 12px; }
+
+.brand { font-weight: 700; letter-spacing: .04em; }
+
+
+.burger {
+  --w: 24px; --h: 2px; --gap: 6px;
+  width: var(--w); height: calc(var(--h)*3 + var(--gap)*2);
+  display: inline-flex; flex-direction: column; justify-content: space-between;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  span {
+    height: var(--h); width: 100%; background: $ink; border-radius: 2px;
+    transition: transform .3s ease, opacity .2s ease, translate .3s ease;
+    transform-origin: center;
+  }
+  &.is-active span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+  &.is-active span:nth-child(2){ opacity: 0; }
+  &.is-active span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
+}
+
+.toolbar { display: inline-flex; gap: 8px; }
+.tool {
+  border: 0; padding: 6px 10px; border-radius: 10px; background: #eef2ff; cursor: pointer;
+  transition: transform .15s ease, box-shadow .2s ease;
+  &:hover { box-shadow: $shadow; transform: translateY(-1px); }
+}
+
+.drawer {
+  position: fixed;
+  inset: 0 auto 0 0; 
+  width: clamp(260px, 35vw, 420px);
+  background: #fff;
+  box-shadow: 16px 0 28px rgba(0,0,0,.08);
+  transform: translateX(-100%);
+  transition: transform .35s cubic-bezier(.22,.61,.36,1);
+  z-index: 40;
+  display: flex; flex-direction: column;
+  &[data-open="true"] { transform: translateX(0); }
+}
+.drawer__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; background: $accent; color: #2b2368;
+}
+.drawer__close {
+  border: 0; background: transparent; font-size: 20px; cursor: pointer;
+}
+.drawer__content {
+  padding: 12px 14px 18px;
+  overflow: auto; 
+}
+.menu { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.menu a {
+  display: block; padding: 10px 12px; border-radius: 12px; text-decoration: none; color: $ink;
+  background: #f5f5ff;
+  transition: background .2s ease, transform .15s ease;
+  &:hover { background: #ebe9ff; transform: translateX(2px); }
+}
+
+.overlay {
+  position: fixed; inset: 0; background: rgba(27,30,40,.35);
+  opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s ease;
+  z-index: 35;
+  &.is-shown { opacity: 1; visibility: visible; }
+}
+
+
+.main { width: min(1200px, 100% - 32px); margin: 18px auto; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+  gap: 16px;
+  align-content: start;
+}
+
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: $shadow;
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
+  max-width: 150px;
+  &:hover { transform: translateY(-2px); transition: transform .15s ease; }
+}
+.card__title { margin: 0 0 6px; font-size: 14px; }
+.card__text {
+  margin: 0;
+  color: $ink-weak;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+.footer {
+  margin-top: auto;
+  background: #e9efff;
+  border-top: 1px solid rgba(27,30,40,.08);
+}
+.footer__inner { width: min(1200px, 100% - 32px); margin: 0 auto; padding: 14px 0; }
+.footer p { margin: 6px 0 0; color: $ink-weak; }
+
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+  .cards.hide-last-row {
+    .card.is-hidden { display: none; }
+  }
+}

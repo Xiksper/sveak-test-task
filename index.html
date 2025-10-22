@@ -1,0 +1,77 @@
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SVEAK — Тестовая верстка</title>
+  </head>
+  <body>
+    <div id="app" class="page">
+
+      <header class="header">
+        <div class="header__left">
+          <button class="burger" aria-label="Открыть меню" id="burgerBtn">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="brand">SVEAK</div>
+        </div>
+        <nav class="toolbar">
+          <button class="tool" aria-label="Play">▶</button>
+          <button class="tool" aria-label="Next">⏭</button>
+          <button class="tool" aria-label="Options">⫶</button>
+        </nav>
+      </header>
+
+      <aside class="drawer" id="drawer" aria-hidden="true" role="dialog">
+        <div class="drawer__header">
+          <button class="drawer__close" id="drawerClose" aria-label="Закрыть меню">✕</button>
+          <h2>Меню</h2>
+        </div>
+        <div class="drawer__content">
+          <ul class="menu">
+            <li><a href="#">Пункт меню 1</a></li>
+            <li><a href="#">Очень длинный пункт меню, который переносится в две строки</a></li>
+            <li><a href="#">Пункт меню 3</a></li>
+            <li><a href="#">Пункт меню 4</a></li>
+            <li><a href="#">Пункт меню 5</a></li>
+            <li><a href="#">Пункт меню 6</a></li>
+            <li><a href="#">Пункт меню 7</a></li>
+            <li><a href="#">Пункт меню 8</a></li>
+            <li><a href="#">Пункт меню 9</a></li>
+            <li><a href="#">Пункт меню 10</a></li>
+          </ul>
+        </div>
+      </aside>
+
+
+      <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+
+      <main class="main">
+        <section class="cards" id="cards">
+          <script>
+            const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consequat ultricies.";
+            const list = Array.from({length: 36}, (_,i)=>i+1)
+              .map(i=>`<article class=\"card\"><h3 class=\"card__title\">Карточка ${i}</h3><p class=\"card__text\">${lorem}</p></article>`)
+              .join("");
+            document.currentScript.insertAdjacentHTML("afterend", list);
+          </script>
+        </section>
+      </main>
+
+
+      <footer class="footer">
+        <div class="footer__inner">
+          <strong>What is Lorem Ipsum?</strong>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries,
+            but also the leap into electronic typesetting, remaining essentially unchanged.
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
