@@ -1,4 +1,5 @@
+import { defineConfig } from 'vite'
 
-export default {
-  server: { open: true }
-};
+export default defineConfig({
+  base: '/sveak-test-task/',
+})
